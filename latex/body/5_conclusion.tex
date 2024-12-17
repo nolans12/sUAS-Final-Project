@@ -1,0 +1,29 @@
+\section{Conclusion}
+
+In this paper, we introduced a coordinated methodology for estimating wind gradient fields using multiple Uncrewed Aerial Systems (UAS). 
+UAS formations can be easily created using the straight line following algorithm introducted, which commands waypoints along a given line for the UAS to follow.
+The sensors onboard the UAS can be filtered using low pass filters and Extended Kalman Filters (EKF). This allows for accurate autopilot control of the estimated system.
+Additionally, we introducted a pseudo wind measurement formulation in the EKF that allows for a UAS to estimate the in-plane wind by using just a GPS and IMU sensor.
+
+Once multiple UAS are flying in a formation with filtered wind measurements, a centralized online optimizer is used to estimate the wind gradient parameters.
+Using stochastic gradient descent, the optimizer is able to take observations from various UAS in the wind field and estimate the wind gradient parameters.
+Once the parameters are optimized, the entire profile of the wind gradient is able to be estimated. This process is quick and effective for multiple UAS, allowing for accurate wind field estimation within minutes of flying.
+Not only is wind gradient estimation important for science and engineering applicaitons, but, it woud allow the UAS who are estimating the wind to utilize the gradient to extract energy from the wind, increasing flight efficiency.
+The quickness of the application presented in this paper would allow for a formation of UAS to estimate the gradient fast enough online to utilize that wind energy.
+
+Future progress could be made by incorperating estimating wind direction into the optimizer. 
+This paper only included estimating the magnitude of wind vs altitude as this is the primary factor in science and engineering applications.
+But, for more advanced applications, especially dynamic soaring, wind direction is just as important.
+Additionally, the effectiveness of the method proposed in this paper should be investigated in a dynamic wind gradient scenario. 
+This paper only included a static wind gradient, where the parameters are constant over time.
+However, this is often not the case as winds gust and change direction over the course of a mission.
+How the optimizer and EKFs response to this dynamic environment would be interesting to explore.
+
+
+% By integrating the UAS autopilot systems with Extended Kalman Filters (EKF) and leveraging a central stochastic gradient descent algorithm, our approach effectively enhances the accuracy of wind gradient estimations. 
+% The simulation results demonstrated that our system not only maintains steady wind measurements but also converges reliably to the true wind gradient parameters under various operational scenarios. 
+% This collaborative framework underscores the potential of multi-agent systems in environmental monitoring and data fusion applications. 
+
+% Future work will focus on deploying this system in real-world environments to validate its performance beyond simulations. 
+% Additionally, we aim to explore the scalability of our approach by incorporating more UAS units and investigating the impact of communication constraints on the estimation accuracy. 
+% Enhancing the robustness of the EKF in dynamic conditions and integrating adaptive learning mechanisms are also planned to further improve the reliability and efficiency of wind gradient estimations.

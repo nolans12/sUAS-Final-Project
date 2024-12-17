@@ -1,0 +1,82 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{abdalla2023,matiko2013,rehman2008,vasel2017}
+\citation{probst2010}
+\citation{recoskie2017}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction and Background}{1}{section.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Impact of terrain on surface roughness, $\alpha $, and wind gradient, \cite  {recoskie2017}}}{1}{figure.1}\protected@file@percent }
+\newlabel{fig:wind_gradient_buildings}{{1}{1}{Impact of terrain on surface roughness, $\alpha $, and wind gradient, \cite {recoskie2017}}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Problem Formulation}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Wind Gradient Model}{1}{subsection.2.1}\protected@file@percent }
+\newlabel{eq:power_law}{{1}{1}{Wind Gradient Model}{equation.2.1}{}}
+\newlabel{eq:wind_gradient}{{2}{1}{Wind Gradient Model}{equation.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Various wind gradient profiles. Comapring a and b values.}}{2}{figure.2}\protected@file@percent }
+\newlabel{fig:wind_gradients}{{2}{2}{Various wind gradient profiles. Comapring a and b values}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}UAS Guidance Algorithm}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Lookahead Straight Line Following Guidance}}{2}{algorithm.1}\protected@file@percent }
+\newlabel{alg:lookahead}{{1}{2}{UAS Guidance Algorithm}{algorithm.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Lookahead Guidance Trigonometry}}{2}{figure.3}\protected@file@percent }
+\newlabel{fig:lookahead}{{3}{2}{Lookahead Guidance Trigonometry}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Lookahead Guidance Simulation. Assuming point mass kinematics.}}{2}{figure.4}\protected@file@percent }
+\newlabel{fig:lookahead_sim}{{4}{2}{Lookahead Guidance Simulation. Assuming point mass kinematics}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}UAS Autopilot Model}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Lateral Autopilot Control Block Diagram}}{3}{figure.5}\protected@file@percent }
+\newlabel{fig:lateral_autopilot}{{5}{3}{Lateral Autopilot Control Block Diagram}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Longitudal Autopilot Control Block Diagram}}{3}{figure.6}\protected@file@percent }
+\newlabel{fig:longitudal_autopilot}{{6}{3}{Longitudal Autopilot Control Block Diagram}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}State and Wind Estimation}{3}{subsection.2.4}\protected@file@percent }
+\newlabel{eq:low_pass}{{4}{3}{State and Wind Estimation}{equation.2.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Low pass filter: effect of cutoff frequency on filtered measurement}}{3}{figure.7}\protected@file@percent }
+\newlabel{fig:low_pass}{{7}{3}{Low pass filter: effect of cutoff frequency on filtered measurement}{figure.7}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Extended Kalman Filter}}{3}{algorithm.2}\protected@file@percent }
+\newlabel{alg:ekf}{{2}{3}{State and Wind Estimation}{algorithm.2}{}}
+\citation{small_uas}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Wind triangle for a UAS, projected into the vertical plane.}}{4}{figure.8}\protected@file@percent }
+\newlabel{fig:wind_triangle}{{8}{4}{Wind triangle for a UAS, projected into the vertical plane}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-E}}Mission Profiles and Cooperative Estimation}{4}{subsection.2.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Stacked UAS formation for estimating wind gradient.}}{4}{figure.9}\protected@file@percent }
+\newlabel{fig:stacked_formation}{{9}{4}{Stacked UAS formation for estimating wind gradient}{figure.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Solution Approach}{4}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Stochastic Gradient Descent}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Estimation Parameters}{5}{subsection.3.2}\protected@file@percent }
+\newlabel{eq:ekf_q_gps}{{19}{5}{Estimation Parameters}{equation.3.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Adjusting the Extended Kalman Filter}{5}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{6}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Basic Results}{6}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Trajectories of 3 UAS spread apart by 25 m guidance lines. Flying in a wind gradient with $a = 1.5$ and $b = 10$ in the [1, 1, 0] inertial direction.}}{6}{figure.10}\protected@file@percent }
+\newlabel{fig:uas_traj_three}{{10}{6}{Trajectories of 3 UAS spread apart by 25 m guidance lines. Flying in a wind gradient with $a = 1.5$ and $b = 10$ in the [1, 1, 0] inertial direction}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces 3 UAS, estimated wind gradient after 2.5 seconds into the simulation.}}{6}{figure.11}\protected@file@percent }
+\newlabel{fig:uas_traj_three_25}{{11}{6}{3 UAS, estimated wind gradient after 2.5 seconds into the simulation}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces 3 UAS, estimated wind gradient after 7 seconds into the simulation.}}{7}{figure.12}\protected@file@percent }
+\newlabel{fig:uas_traj_three_75}{{12}{7}{3 UAS, estimated wind gradient after 7 seconds into the simulation}{figure.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces 3 UAS, estimated wind gradient after 15 seconds into the simulation.}}{7}{figure.13}\protected@file@percent }
+\newlabel{fig:uas_traj_three_15}{{13}{7}{3 UAS, estimated wind gradient after 15 seconds into the simulation}{figure.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Single UAS Edge Case}{7}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces 1 UAS, estimated wind gradient after 5 seconds into the simulation.}}{7}{figure.14}\protected@file@percent }
+\newlabel{fig:uas_traj_one_5}{{14}{7}{1 UAS, estimated wind gradient after 5 seconds into the simulation}{figure.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces 1 UAS, estimated wind gradient after 15 seconds into the simulation.}}{7}{figure.15}\protected@file@percent }
+\newlabel{fig:uas_traj_one_15}{{15}{7}{1 UAS, estimated wind gradient after 15 seconds into the simulation}{figure.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Comparing Number of UAS}{8}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Benchmarking the impact number of UAS has on estimating the wind gradient field.}}{8}{figure.16}\protected@file@percent }
+\newlabel{fig:benchmark_num_uas}{{16}{8}{Benchmarking the impact number of UAS has on estimating the wind gradient field}{figure.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Single UAS with a Climb Rate}{8}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces 3D Trajectory of a UAS following a line with a climb rate.}}{8}{figure.17}\protected@file@percent }
+\newlabel{fig:uas_traj_one_climb}{{17}{8}{3D Trajectory of a UAS following a line with a climb rate}{figure.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces 1 UAS, estimated wind gradient after 5 seconds into the simulation.}}{9}{figure.18}\protected@file@percent }
+\newlabel{fig:uas_traj_one_climb_5}{{18}{9}{1 UAS, estimated wind gradient after 5 seconds into the simulation}{figure.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces 1 UAS, estimated wind gradient after 20 seconds into the simulation.}}{9}{figure.19}\protected@file@percent }
+\newlabel{fig:uas_traj_one_climb_20}{{19}{9}{1 UAS, estimated wind gradient after 20 seconds into the simulation}{figure.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces 1 UAS, estimated wind gradient after 40 seconds into the simulation.}}{9}{figure.20}\protected@file@percent }
+\newlabel{fig:uas_traj_one_climb_40}{{20}{9}{1 UAS, estimated wind gradient after 40 seconds into the simulation}{figure.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Conclusion}{9}{section.5}\protected@file@percent }
+\bibcite{abdalla2023}{1}
+\bibcite{matiko2013}{2}
+\bibcite{rehman2008}{3}
+\bibcite{vasel2017}{4}
+\bibcite{probst2010}{5}
+\bibcite{recoskie2017}{6}
+\bibcite{small_uas}{7}
+\@writefile{toc}{\contentsline {section}{References}{10}{section*.1}\protected@file@percent }
+\gdef \@abspage@last{10}

@@ -1,0 +1,163 @@
+\section{Solution Approach}
+
+\subsection{Stochastic Gradient Descent}
+
+To collabratively estimate the wind gradient, multiple UAS will share their state estimates and wind estimates to a centralized processor.
+The processor will use online stochastic gradient descent to iteratively estimate the wind gradient equation given in Equation~\ref{eq:wind_gradient}.
+
+Stochastic gradient descent (SGD) is an iterative optimization algorithm that is used to minimize a objective function of the form:
+
+\begin{equation}
+    Q(w) = \frac{1}{n} \sum_{i=1}^{n} Q_{i}(w)
+\end{equation}
+
+Where the minimizing parameter, $w$, is estimated over time.
+
+To adapt this algorithm to the wind gradient estimation problem, we can define the following loss function:
+
+\begin{equation}
+    Loss = \frac{1}{2} (v_{i} - a log(h_{i} - b))^2
+\end{equation}
+
+Where $v_{i}$ is the estimated wind speed at the $i$th UAS and $h_{i}$ is the estimated height of the $i$th UAS.
+This loss function represents the magnitude difference between the current estimated wind gradient function applied at estimated height, $a log(h_{i} - b)$, and the wind measurement that was taken, $v_{i}$.
+The goal is to minimize this loss function, as this would represent a minimization of expected vs actual wind speed, much like the kalman gain being applied to the innovation term on the EKF mentioned above.
+
+In order to do stochastic gradient descent on this loss function, we must take the derivative with respect to both parameters we need to estimate, $a$ and $b$.
+The result is the following gradient equations:
+
+\begin{equation}
+    \frac{\partial Loss}{\partial a} = - (v_{i} - a log(h_{i} - b)) log(h_{i} - b)
+\end{equation}
+
+\begin{equation}
+    \frac{\partial Loss}{\partial b} = - (v_{i} - a log(h_{i} - b)) \frac{a}{h_{i} - b}
+\end{equation}
+
+Now, we can descend down the gradient to minimize the loss function with the following update equations:
+
+\begin{equation}
+    a_{k+1} = a_{k} - \eta_{a} \frac{\partial Loss}{\partial a}
+\end{equation}
+
+\begin{equation}
+    b_{k+1} = b_{k} - \eta_{b} \frac{\partial Loss}{\partial b}
+\end{equation}
+
+Where $\eta_{a}$ and $\eta_{b}$ are the step size or learning rates for the parameters $a$ and $b$.
+
+Thus, the total algorithm to simulate the stacked UAS formation collaboratively estimating the wind gradient is as follows:
+
+\begin{enumerate}
+    \item Initialize a guess of $a$ and $b$
+    \item Increment time step $k$
+    \item For each UAS:
+        \begin{enumerate}
+            \item Get real wind vector from the true wind gradient given the true UAS state
+            \item Using real wind and state, simulate the sensor measurements (true + noise)
+            \item Use EKF and Low Pass filters to estimate the UAS state and wind vector
+            \item Using estimated state and wind, get target waypoint from lookahead line guidance algorithm
+            \item Input lookahead waypoint into SLC autopilot controller, outputting the control commands
+            \item Using control commands, simulate the real UAS state reacting to this control, using ode45
+        \end{enumerate}
+    \item For each collected wind estimate, perform SGD to update the wind gradient parameters
+    \item Repeat to Step 2
+\end{enumerate}
+
+This algorithm allows for online estimation of the wind gradient parameters, using iterative SGD.
+All solutions shown in this paper use a $\eta_{a} = 0.01$ and $\eta_{b} = 2.5$ with an initial guess of $a = 0$ and $b = 0$.
+
+\subsection{Estimation Parameters}
+
+% \nsnote{here talk about the specific parameters used for low pass and ekf}
+Through tuning and theory methods, the specific filter parameters we will use for this simulation are as follows:
+
+\textbf{Low Pass Filter:}
+
+Cutoff frequency:
+\begin{itemize}
+    \item $a_{\omega} = 1000$
+    \item $a_{h} = 10$
+    \item $a_{V_{a}} = 30$
+\end{itemize}
+
+\textbf{Extended Kalman Filter:}
+
+\begin{equation}
+    \mathbf{Q_{Attitude}} = \begin{bmatrix}
+        0.01 \frac{pi}{180} ^ 2 & 0 \\
+        0 & 0.01 \frac{pi}{180} ^ 2
+    \end{bmatrix}
+\end{equation}
+\begin{equation}
+    \mathbf{R_{Attitude}} = \begin{bmatrix}
+        e_{\phi \theta \psi}^2 & 0 & 0 \\
+        0 & e_{\phi \theta \psi}^2 & 0 \\
+        0 & 0 & e_{\phi \theta \psi}^2
+    \end{bmatrix}
+\end{equation}
+
+Where:
+\begin{center}
+$x_{Attitude} = [\phi, \theta]$ \\
+$y_{Attitude} \approx [p, q, r]$ \\
+$e_{x}$ terms are known error uncertainties
+\end{center}
+
+
+\begin{equation}
+    \mathbf{Q_{GPS}} = \begin{bmatrix}
+        100 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 100 & 0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 4 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 5 \frac{pi}{180} ^ 2 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 25 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 25 & 0 \\
+        0 & 0 & 0 & 0 & 0 & 0 & 5 \frac{pi}{180} ^ 2
+    \end{bmatrix}
+    \label{eq:ekf_q_gps}
+\end{equation}
+
+\begin{equation}
+    \mathbf{R_{GPS}} = \begin{bmatrix}
+        e_{p_{n}}^2 & 0 & 0 & 0 & 0 & 0 \\
+        0 & e_{p_{e}}^2 & 0 & 0 & 0 & 0 \\
+        0 & 0 & e_{V_g}^2 & 0 & 0 & 0 \\
+        0 & 0 & 0 & \frac{e_{V_g}}{20}^2 & 0 & 0\\ 
+        0 & 0 & 0 & 0 & e_{V_{g}}^2 & 0 \\
+        0 & 0 & 0 & 0 & 0 & e_{V_{g}}^2 
+    \end{bmatrix}
+\end{equation}
+
+Where:
+\begin{center}
+$x_{GPS} = [p_{n}, p_{e}, V_{g}, \chi, w_n, w_e, \psi]$ \\
+$y_{GPS} \approx [p_{n}, p_{e}, V_{g}, \chi, w_n, w_e]$ \\
+$e_{x}$ terms are known error uncertainties
+\end{center}
+
+\subsection{Adjusting the Extended Kalman Filter}
+
+It is important to note that the EKF implementation presented in the Problem Formulation section makes the assumption that the wind measurement is constant with time.
+The transition function for the wind state is set to:
+
+\begin{equation}
+    \dot{w}_n = 0
+\end{equation}
+
+\begin{equation}
+    \dot{w}_e = 0
+\end{equation}
+
+This assumption is valid for steady state wind conditions, but, for this problem, we need to be careful with this assumption.
+Although the wind gradient is constant, the magnitudes of wind vary with altitude. 
+Thus, as the UAS drift up and down, which happens even though we are commanding a straight line path because there is sensor and autopilot noise, the wind magnitude will change.
+This changing wind magnitude is especially prevalent in large wind gradients, or in UAS flying at a low altitude, as that is where the gradient is the largest, as seen in Figure~\ref{fig:wind_gradients}.
+
+To account for this, we can adjust the EKF matrices to be less confident in the assumption that wind is steady state.
+This can be done by increasing the diagonal elements of the process noise covariance matrix, $\mathbf{Q}$, for the wind predictions. 
+By increasing the process noise, the assumption that wind is steady state in the transition function has less weight, and the EKF is less confident in updating the wind according to that assumption. 
+This allows the EKF to work better in the presence of changing wind magnitudes as the UAS traverses the gradient. Even though we are still making the assumption that wind is steady state, we are not as confident in it.
+
+Specially, I found that increasing the 5th and 6th diagonal elements of the Q given in Equation~\ref{eq:ekf_q_gps} to 150 instead of 25 was able to account for the changing wind magnitudes in a wind gradient.
+This worked up to wind gradients with an $a$ value of 15, which is a very strong gradient. If you wish to use this EKF implementation in a stronger wind gradient, you will likely need to increase the process noise even more.

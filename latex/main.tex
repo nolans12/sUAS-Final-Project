@@ -1,0 +1,64 @@
+\documentclass[conference]{IEEEtran}
+% \IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+%Template version as of 6/27/2024
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}   
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+% \usepackage{hyperref}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\newcommand{\nsnote}[1] {{$\langle${\textcolor{blue}{NS: \textbf{#1}}}$\rangle$}}
+\begin{document}
+
+\title{Cooperative Wind Gradient Estimation for Small UAS Formations\\
+}
+
+\author{\IEEEauthorblockN{Nolan Stevenson}
+\IEEEauthorblockA{\textit{ASEN 5128: Small Unmanned Aircraft System Guidance, Navigation, and Control} \\
+\textit{University of Colorado Boulder} \\
+}
+}
+
+\maketitle
+
+\begin{enumerate}
+    \item \href{https://youtu.be/I1R92603xzI}{{\textcolor{blue}{Link to 3 UASs Estimating Wind Gradient}}}
+    \item \href{https://youtu.be/PB9hqby9TCI}{{\textcolor{blue}{Link to 1 UAS, No Climb, Estimating Wind Gradient}}}
+    \item \href{https://youtu.be/ZCwqw6uvsHc}{{\textcolor{blue}{Link to 1 UAS With Climb Estimating Wind Gradient}}}
+\end{enumerate}
+
+\input{body/1_introduction}
+\input{body/2_problem_formulation}
+\input{body/3_solution_approach}
+\input{body/4_results}
+\input{body/5_conclusion}
+
+\begin{thebibliography}{00}
+
+\bibitem{abdalla2023} A. Abdalla, W. El-Osta, Y. Nassar, W. Husien, E. Dekam, and G. Miskeen, "Estimation of Dynamic Wind Shear Coefficient to Characterize Best Fit of Wind Speed Profiles under Different Conditions of Atmospheric Stability and Terrains for the Assessment of Height-Dependent Wind Energy in Libya," Applied Solar Energy, vol. 59, pp. 343-359, Oct. 2023.
+
+\bibitem{matiko2013} J. W. Matiko, N. J. Grabham, S. P. Beeby, and M. J. Tudor, "Review of the Application of Energy Harvesting in Buildings," Measurement Science and Technology, vol. 25, no. 1, pp. 012002, Nov. 2013.
+
+\bibitem{rehman2008} S. Rehman and N. M. Al-Abbadi, "Wind Shear Coefficient, Turbulence Intensity and Wind Power Potential Assessment for Dhulom, Saudi Arabia," Renewable Energy, vol. 33, no. 12, pp. 2653-2660, Dec. 2008.
+
+\bibitem{vasel2017} A. Vasel-Be-Hagh and C. L. Archer, "Wind Farm Hub Height Optimization," Applied Energy, vol. 195, pp. 905-921, Jun. 2017.
+
+\bibitem{probst2010} O. Probst and D. Cárdenas, "State of the Art and Trends in Wind Resource Assessment," Energies, vol. 3, no. 6, pp. 1087-1106, Jun. 2010.
+
+\bibitem{recoskie2017} S. Recoskie, E. Lanteigne, and W. Gueaieb, "A High-Fidelity Energy Efficient Path Planner for Unmanned Airships," Robotics, vol. 6, no. 4, pp. 28, Dec. 2017.
+
+\bibitem{small_uas}“Small Unmanned Aircraft | Princeton University Press,” February 26, 2012. https://press.princeton.edu/books/hardcover/9780691149219/small-unmanned-aircraft.
+
+
+\end{thebibliography}
+
+\end{document}
